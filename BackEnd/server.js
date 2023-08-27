@@ -3,6 +3,9 @@ const mysql = require('mysql');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
+const sendResetEmail = require('./utilities/emailService');
+const jwt = require('jsonwebtoken');
+const expressJwt = require('express-jwt');
 
 const app = express();
 app.use(cors());
@@ -15,12 +18,19 @@ const db = mysql.createConnection({
     database: "petheaven"
 });
 
+// // Protect routes using JWT
+// app.use(
+//     expressJwt({ secret: JWT_SECRET }).unless({
+//       path: ['/login', '/register', '/forgot-password', '/reset-password']
+//     })
+//   );
+  
+
 //Regiter Requests
 app.post('/register', async (req, res) => {
     try {
         const { username, email, password ,contactNum, address } = req.body;
 
-        // Hash the password using bcrypt
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const sql = "INSERT INTO users (`name`,`email`,`password`,`contactNumber`,`address`,`role`) VALUES (?)";
@@ -71,6 +81,76 @@ app.post('/login', async (req, res) => {
 });
 
 //Reset Password section
+
+// Step 1: Generate Reset Token
+app.post('/forgot-password', async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        // Generate a random reset token
+        const resetToken = crypto.randomBytes(20).toString('hex');
+
+        // Store the reset token in the database
+        const updateTokenQuery = "UPDATE users SET token = ? WHERE email = ?";
+        db.query(updateTokenQuery, [resetToken, email], (err, result) => {
+            if (err) {
+                return res.status(500).json({ error: "Error updating reset token" });
+            }
+
+            // Send reset email
+            const resetLink = `http://localhost:3001/reset-password/${resetToken}`;
+            sendResetEmail(email,resetLink);
+
+            return res.json({ message: "Reset token sent to your email" });
+        });
+    } catch (error) {
+        return res.status(500).json({ error: "Error requesting password reset" });
+    }
+});
+
+// Step 2: Reset Password : form Page
+app.get('/reset-password/:token', (req, res) => {
+    const { token } = req.params;
+
+    // Fetch user by reset token
+    const checkTokenQuery = "SELECT * FROM users WHERE token = ?";
+    db.query(checkTokenQuery, [token], (err, result) => {
+        if (err || result.length === 0) {
+            return res.status(400).json({ error: "Invalid token" }); // Return an error response
+        }
+
+        // Send the user data with the token to the client
+        res.redirect(`http://localhost:5173/reset-password/${token}`);
+    });
+});
+
+
+// Step 3: Reset Password : Update Password
+app.post('/reset-password/:token', async (req, res) => {
+    const { token } = req.params;
+    const { newPassword } = req.body;
+
+    // Fetch user by reset token
+    const checkTokenQuery = "SELECT * FROM users WHERE token = ?";
+    db.query(checkTokenQuery, [token], async (err, result) => {
+        if (err || result.length === 0) {
+            return res.status(400).send("Invalid token");
+        }
+
+        const user = result[0];
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        // Update user's password and clear reset token
+        const updatePasswordQuery = "UPDATE users SET password = ?, token = NULL WHERE id = ?";
+        db.query(updatePasswordQuery, [hashedPassword, user.id], (err, result) => {
+            if (err) {
+                return res.status(500).json({ error: "Error updating password" });
+            }
+
+            return res.json({ message: "Password reset successful" });
+        });
+    });
+});
 
 
 app.listen(3001, () => {

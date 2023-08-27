@@ -16,18 +16,14 @@ const Hero = () => {
               Find Your New Best Friend
             </p>
 
-            <img
-              src="src\assets\handpaw.jpg"
-              alt="handpaw"
-              className="object-contain h-48 w-96"
-            />
-
-            <a
-              href="#"
-              className="ml-24 inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-            >
-              Know About Process
-            </a>
+            <div>
+              <a
+                href="#"
+                className="ml-24 inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+              >
+                Know About Process
+              </a>
+            </div>
           </div>
           <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
             <img
@@ -41,20 +37,20 @@ const Hero = () => {
 
       {/* The Category Section */}
 
-      <div className="bg-blue-500 p-2 m-10 rounded-3xl">
+      <div className="bg-blue-500 m-10 rounded-3xl">
         <div className="flex flex-row items-center justify-between">
-          <div className="ml-28 mr-16 mb-56 max-w-sm CatBig">
+          <div className="ml-20 mr-16 mb-56 max-w-sm CatBig">
             <div className="flex flex-col">
               <img
                 src="src\assets\CatBig.png"
                 className="h-auto w-36 rounded-lg"
-                alt="Bird"
+                alt="Cat"
               />
               {/* <p>Cat</p> */}
             </div>
           </div>
 
-          <div className="max-w-sm scale-150">
+          <div className="ml-16 scale-150">
             <div className="flex flex-col">
               <img
                 src="src\assets\blue_bird.png"
@@ -65,7 +61,7 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="max-w-sm scale-125">
+          <div className="scale-125">
             <div className="flex flex-col">
               <img
                 src="src\assets\rabbit.png"

@@ -9,6 +9,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [loginFailed, setLoginFailed] = useState(false);
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -60,10 +61,14 @@ const Login = () => {
         })
         .then((res) => {
           console.log("Login successful:", res.data);
+          const { token, user } = res.data;
+          console.log("Token:", token);
+          console.log("User:", user);
           navigate("/"); // Make sure you import and use the navigate function
         })
         .catch((err) => {
           console.log("Login failed:", err);
+          setLoginFailed(true);
         });
     }
   };
@@ -123,6 +128,30 @@ const Login = () => {
                   {passwordError && (
                     <span className="text-red-600">{passwordError}</span>
                   )}
+                  {loginFailed && (
+                    <div
+                      className="mt-4 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+                      role="alert"
+                    >
+                      <svg
+                        className="flex-shrink-0 inline w-4 h-4 mr-3"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                      </svg>
+                      <span className="sr-only">Info</span>
+                      <div>
+                        <span className="font-medium">
+                          Invalid credentials!
+                        </span>
+                        <br></br>
+                        Check your email or password and try again.
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className="mt-8">
@@ -136,19 +165,22 @@ const Login = () => {
               </form>
 
               <div className="mt-8 text-center">
-                <a className="underline text-lg" href="">
+                <Link className="underline text-lg" to="/forgot-password">
                   Forget Password?
-                </a>
+                </Link>
               </div>
-              <div className="mt-8">
+
+              {/* This section is for login using google and facebook which will be implemented later  */}
+
+              {/* <div className="mt-8">
                 <h1 className="flex flex-row">
                   <span className="flex-1 border-b-2 border-black mr-6"></span>
                   <p className="text-lg">or Log in With</p>
                   <span className="flex-1 border-b-2 border-black ml-6"></span>
                 </h1>
-              </div>
+              </div> */}
 
-              <div className="mt-8 flex flex-wrap items-center justify-center">
+              {/* <div className="mt-8 flex flex-wrap items-center justify-center">
                 <button className="w-2/5 flex flex-wrap bg-blue-800 hover:bg-blue-950 text-white font-bold py-2 px-4 rounded-full mr-4">
                   <img
                     src={FacebookIcon}
@@ -165,7 +197,7 @@ const Login = () => {
                   />
                   Google
                 </button>
-              </div>
+              </div> */}
 
               <div className="mt-8">
                 <div className="mt-8 text-center">
