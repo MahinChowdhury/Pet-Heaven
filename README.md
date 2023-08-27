@@ -1,7 +1,18 @@
+## Installation Instructions
+
+`1. git clone the repository`
+`2. cd Pet-Heaven`
+`3. npm install`
+`4. npm run dev`
+`5. open a new terminal in VS code`
+`6. cd .\BackEnd\`
+`7. npm install`
+`8. npm start`
+
 ## Project Preview
 
 <a  href="https://ibb.co/7QtbXz2"><img  src="https://i.ibb.co/cwhx1vD/image.png"  alt="image"></a>
-<a href="https://ibb.co/FJy2xvv"><img src="https://i.ibb.co/q9cKyGG/image.png" alt="image" border="0"></a>
+<a href="https://ibb.co/FJy2xvv"><img src="https://i.ibb.co/q9cKyGG/image.png" alt="image"></a>
 <a  href="https://ibb.co/wWpGFWg"><img  src="https://i.ibb.co/2tcV1th/image.png"  alt="image"></a>
 
 # React + TypeScript + Vite
