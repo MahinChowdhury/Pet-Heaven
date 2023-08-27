@@ -1,7 +1,73 @@
 import GoogleIcon from "../../assets/icons/icons8-google.svg";
 import FacebookIcon from "../../assets/icons/icons8-facebook.svg";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    if (name === "email") {
+      setEmail(value);
+      setEmailError("");
+    } else if (name === "password") {
+      setPassword(value);
+      setPasswordError("");
+    }
+  };
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    let isEmailValid = true;
+    let isPasswordValid = true;
+
+    if (email.trim() === "") {
+      setEmailError("Email is required");
+      isEmailValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      setEmailError("Invalid email format");
+      isEmailValid = false;
+    } else {
+      setEmailError(""); // Clear the error when the input is valid
+    }
+
+    if (password.trim() === "") {
+      setPasswordError("Password is required");
+      isPasswordValid = false;
+    } else if (password.length < 6) {
+      setPasswordError("Password must be at least 6 characters");
+      isPasswordValid = false;
+    } else {
+      setPasswordError(""); // Clear the error when the input is valid
+    }
+
+    if (isEmailValid && isPasswordValid) {
+      // Perform your login logic
+      console.log("Login successful");
+
+      axios
+        .post("http://localhost:3001/login", {
+          email,
+          password,
+        })
+        .then((res) => {
+          console.log("Login successful:", res.data);
+          navigate("/"); // Make sure you import and use the navigate function
+        })
+        .catch((err) => {
+          console.log("Login failed:", err);
+        });
+    }
+  };
+
   return (
     <>
       <header className="bg-amber-100 sticky top-0 flex-wrap z-[20] mx-auto flex w-full items-center justify-start border-gray-500">
@@ -9,9 +75,9 @@ const Login = () => {
           <img src="src\assets\logo.png" alt="logo" />
         </div>
 
-        <h1 className="ml-3 font-sans text-2xl font-bold text-red-900">
+        <Link className="ml-3 font-sans text-2xl font-bold text-red-900" to="/">
           Pet Heaven
-        </h1>
+        </Link>
       </header>
       <div className="h-screen">
         <div className="container h-full px-6">
@@ -29,7 +95,7 @@ const Login = () => {
             <div className="md:w-8/12 lg:ml-6 lg:w-4/12">
               <h1 className="font-semibold text-3xl text-center mb-4">Login</h1>
 
-              <form action="">
+              <form action="" onSubmit={handleSubmit}>
                 <div className="mt-8">
                   <input
                     id="email"
@@ -38,7 +104,11 @@ const Login = () => {
                     required
                     className="block bg-gray-300 w-full rounded-lg border-0 p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-600 focus:ring- placeholder:text-lg focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="Email"
+                    onChange={handleInput}
                   />
+                  {emailError && (
+                    <span className="text-red-600">{emailError}</span>
+                  )}
                 </div>
                 <div className="mt-8">
                   <input
@@ -48,7 +118,11 @@ const Login = () => {
                     required
                     className="block bg-gray-300 w-full rounded-md border-0 p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-600 placeholder:text-lg focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="Password"
+                    onChange={handleInput}
                   />
+                  {passwordError && (
+                    <span className="text-red-600">{passwordError}</span>
+                  )}
                 </div>
 
                 <div className="mt-8">
@@ -95,12 +169,10 @@ const Login = () => {
 
               <div className="mt-8">
                 <div className="mt-8 text-center">
-                  <a className="text-lg" href="">
+                  <Link className="text-lg" to="/register">
                     Don't have an account?{" "}
-                    <a href="" className="font-semibold">
-                      Register
-                    </a>
-                  </a>
+                    <span className="font-semibold">Register</span>
+                  </Link>
                 </div>
               </div>
             </div>

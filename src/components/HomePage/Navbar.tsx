@@ -2,6 +2,7 @@ import { useState } from "react";
 import CloseButton from "../utilities/CloseButton";
 import MenuButton from "../utilities/MenuButton";
 import Navlinks from "./Navlinks";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsopen] = useState(false);
@@ -17,9 +18,9 @@ const Navbar = () => {
           <img src="src\assets\logo.png" alt="logo" />
         </div>
 
-        <h1 className="ml-3 font-sans text-2xl font-bold text-red-900">
+        <Link className="ml-3 font-sans text-2xl font-bold text-red-900" to="/">
           Pet Heaven
-        </h1>
+        </Link>
 
         <div className="hidden w-1/2 lg:flex justify-between mx-auto">
           <Navlinks />

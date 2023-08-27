@@ -1,7 +1,97 @@
-import GoogleIcon from "../../assets/icons/icons8-google.svg";
-import FacebookIcon from "../../assets/icons/icons8-facebook.svg";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Register = () => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confPassword, setConfPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confPasswordError, setConfPasswordError] = useState("");
+  const [contactNum, setContactNum] = useState("");
+  const [address, setAddress] = useState("");
+
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    if (name === "email") {
+      setEmail(value);
+      setEmailError("");
+    } else if (name === "password") {
+      setPassword(value);
+      setPasswordError("");
+    } else if (name === "conf_password") {
+      setConfPassword(value);
+      setConfPasswordError("");
+    } else if (name === "username") {
+      setUsername(value);
+    } else if (name === "contactNum") {
+      setContactNum(value);
+    } else if (name === "address") {
+      setAddress(value);
+    }
+  };
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    let isValid = true;
+
+    if (email.trim() === "") {
+      setEmailError("Email is required");
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      setEmailError("Invalid email format");
+      isValid = false;
+    } else {
+      setEmailError(""); // Clear the error when the input is valid
+    }
+
+    if (password.trim() === "") {
+      setPasswordError("Password is required");
+      isValid = false;
+    } else if (password.length < 6) {
+      setPasswordError("Password must be at least 6 characters");
+      isValid = false;
+    } else {
+      setPasswordError(""); // Clear the error when the input is valid
+    }
+
+    if (confPassword.trim() === "") {
+      setConfPasswordError("Confirm Password is required");
+      isValid = false;
+    } else if (confPassword !== password) {
+      setConfPasswordError("Passwords do not match");
+      isValid = false;
+    } else {
+      setConfPasswordError(""); // Clear the error when the input is valid
+    }
+
+    if (isValid) {
+      // Perform your registration logic
+      console.log("Registration successful");
+
+      axios
+        .post("http://localhost:3001/register", {
+          username,
+          email,
+          password,
+          contactNum,
+          address,
+        })
+        .then((res) => {
+          console.log("Registration successful:", res.data);
+          navigate("/"); // Make sure you import and use the navigate function
+        })
+        .catch((err) => {
+          console.log("Registration failed:", err);
+        });
+    }
+  };
+
   return (
     <>
       <header className="bg-amber-100 sticky top-0 flex-wrap z-[20] mx-auto flex w-full items-center justify-start border-gray-500">
@@ -9,9 +99,9 @@ const Register = () => {
           <img src="src\assets\logo.png" alt="logo" />
         </div>
 
-        <h1 className="ml-3 font-sans text-2xl font-bold text-red-900">
+        <Link className="ml-3 font-sans text-2xl font-bold text-red-900" to="/">
           Pet Heaven
-        </h1>
+        </Link>
       </header>
 
       <div className="h-screen">
@@ -32,7 +122,7 @@ const Register = () => {
                 Register
               </h1>
 
-              <form action="">
+              <form action="" onSubmit={handleSubmit}>
                 <div className="mt-6">
                   <input
                     id="username"
@@ -41,9 +131,9 @@ const Register = () => {
                     required
                     className="block bg-gray-300 w-full rounded-lg border-0 p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-600 focus:ring- placeholder:text-lg focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="Username"
+                    onChange={handleInput}
                   />
                 </div>
-
                 <div className="mt-6">
                   <input
                     id="email"
@@ -52,9 +142,12 @@ const Register = () => {
                     required
                     className="block bg-gray-300 w-full rounded-lg border-0 p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-600 focus:ring- placeholder:text-lg focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="Email"
+                    onChange={handleInput}
                   />
                 </div>
-
+                {emailError && (
+                  <span className="text-red-600">{emailError}</span>
+                )}
                 <div className="mt-6">
                   <input
                     id="address"
@@ -63,17 +156,19 @@ const Register = () => {
                     required
                     className="block bg-gray-300 w-full rounded-lg border-0 p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-600 focus:ring- placeholder:text-lg focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="Address"
+                    onChange={handleInput}
                   />
                 </div>
 
                 <div className="mt-6">
                   <input
-                    id="contact"
-                    name="contact"
+                    id="contactNum"
+                    name="contactNum"
                     type="text"
                     required
                     className="block bg-gray-300 w-full rounded-lg border-0 p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-600 focus:ring- placeholder:text-lg focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="Contact Number"
+                    onChange={handleInput}
                   />
                 </div>
 
@@ -85,7 +180,11 @@ const Register = () => {
                     required
                     className="block bg-gray-300 w-full rounded-md border-0 p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-600 placeholder:text-lg focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="Password"
+                    onChange={handleInput}
                   />
+                  {passwordError && (
+                    <span className="text-red-600">{passwordError}</span>
+                  )}
                 </div>
 
                 <div className="mt-6">
@@ -96,7 +195,11 @@ const Register = () => {
                     required
                     className="block bg-gray-300 w-full rounded-md border-0 p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-600 placeholder:text-lg focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="Confirm Password"
+                    onChange={handleInput}
                   />
+                  {confPasswordError && (
+                    <span className="text-red-600">{confPasswordError}</span>
+                  )}
                 </div>
 
                 <div className="mt-6">
@@ -111,12 +214,10 @@ const Register = () => {
 
               <div className="mt-6">
                 <div className="mt-8 text-center">
-                  <a className="text-lg" href="">
+                  <Link className="text-lg" to="/login">
                     Already have an account?{" "}
-                    <a href="" className="font-semibold">
-                      Login
-                    </a>
-                  </a>
+                    <span className="font-semibold">Login</span>
+                  </Link>
                 </div>
               </div>
             </div>

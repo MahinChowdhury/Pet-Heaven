@@ -1,38 +1,26 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Navlinks = () => {
   return (
     <>
-      <NavLink className="mx-2 text-xl font-semibold text-red-900" to="/">
+      <Link className="mx-2 text-xl font-semibold text-red-900" to="/">
         Home
-      </NavLink>
-      <NavLink
-        className="mx-2 text-xl font-semibold text-red-900"
-        to="/petlist"
-      >
+      </Link>
+      <Link className="mx-2 text-xl font-semibold text-red-900" to="/petlist">
         Pet list
-      </NavLink>
-      <NavLink
-        className="mx-2 text-xl font-semibold text-red-900"
-        to="/adoption"
-      >
+      </Link>
+      <Link className="mx-2 text-xl font-semibold text-red-900" to="/adoption">
         Adoption
-      </NavLink>
-      <NavLink
-        className="mx-2 text-xl font-semibold text-red-900"
-        to="/process"
-      >
+      </Link>
+      <Link className="mx-2 text-xl font-semibold text-red-900" to="/process">
         Process
-      </NavLink>
-      <NavLink
-        className="mx-2 text-xl font-semibold text-red-900"
-        to="/contact"
-      >
+      </Link>
+      <Link className="mx-2 text-xl font-semibold text-red-900" to="/contact">
         Contact
-      </NavLink>
-      <NavLink className="mx-2 text-xl font-semibold text-red-900" to="/login">
+      </Link>
+      <Link className="mx-2 text-xl font-semibold text-red-900" to="/login">
         Login
-      </NavLink>
+      </Link>
     </>
   );
 };

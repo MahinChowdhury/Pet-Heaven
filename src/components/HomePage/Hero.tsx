@@ -41,7 +41,7 @@ const Hero = () => {
 
       {/* The Category Section */}
 
-      <div className="bg-amber-200 p-2 m-10 rounded-3xl">
+      <div className="bg-blue-500 p-2 m-10 rounded-3xl">
         <div className="flex flex-row items-center justify-between">
           <div className="ml-28 mr-16 mb-56 max-w-sm CatBig">
             <div className="flex flex-col">

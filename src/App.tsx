@@ -1,16 +1,18 @@
 import Login from "./components/authentication/login";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./components/authentication/Register";
-import Hero from "./components/HomePage/Hero";
-import Navbar from "./components/HomePage/Navbar";
+import Home from "./components/HomePage/Home";
 
 const App = () => {
   return (
-    <>
-      {/* <Navbar />
-      <Hero /> */}
-      <Login />
-      {/* <Register /> */}
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
