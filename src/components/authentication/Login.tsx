@@ -61,9 +61,6 @@ const Login = () => {
         })
         .then((res) => {
           console.log("Login successful:", res.data);
-          const { token, user } = res.data;
-          console.log("Token:", token);
-          console.log("User:", user);
           navigate("/"); // Make sure you import and use the navigate function
         })
         .catch((err) => {
