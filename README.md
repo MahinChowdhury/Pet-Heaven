@@ -1,13 +1,29 @@
 ## Installation Instructions
 
-`1. git clone the repository`
-`2. cd Pet-Heaven`
-`3. npm install`
-`4. npm run dev`
-`5. open a new terminal in VS code`
-`6. cd .\BackEnd\`
-`7. npm install`
-`8. npm start`
+```
+1. git clone the repository
+```
+```
+2. cd Pet-Heaven
+```
+```
+3. npm install
+```
+```
+4. npm run dev
+```
+```
+5. open a new terminal in VS code
+```
+```
+6. cd .\BackEnd\
+```
+```
+7. npm install
+```
+```
+8. npm start
+```
 
 ## Project Preview
 
