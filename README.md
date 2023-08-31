@@ -25,6 +25,10 @@
 8. npm start
 ```
 
+```
+create database named "petheaven" in phpmyadmin and inside that import the "petheaven.sql" file given in the directory
+```
+
 ## Project Preview
 
 <a  href="https://ibb.co/7QtbXz2"><img  src="https://i.ibb.co/cwhx1vD/image.png"  alt="image"></a>
