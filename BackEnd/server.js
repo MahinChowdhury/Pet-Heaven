@@ -18,6 +18,8 @@ const db = mysql.createConnection({
     database: "petheaven"
 });
 
+console.log("Connected");
+
 // // Protect routes using JWT
 // app.use(
 //     expressJwt({ secret: JWT_SECRET }).unless({
@@ -150,6 +152,33 @@ app.post('/reset-password/:token', async (req, res) => {
             return res.json({ message: "Password reset successful" });
         });
     });
+});
+
+//Admin Section
+
+app.post('/adminLogin', async (req, res) => {
+    try{
+        const {email,role,password} = req.body;
+        console.log(email + ' ' + password);
+        const sql = "SELECT * FROM users WHERE email = ?";
+        db.query(sql, [email], async (err, data) => {
+            if (err || data.length === 0) {
+                return res.status(401).json({ error: "Invalid credentials" });
+            }
+
+            const user = data[0];
+            const passwordMatch = user.password;
+            if (!passwordMatch) {
+                return res.status(401).json({ error: "Invalid credentials" });
+            }
+
+            return res.json(data);
+
+        });
+
+    }catch(error){
+        return res.status(500).json({ error: "Login error" });
+    }
 });
 
 

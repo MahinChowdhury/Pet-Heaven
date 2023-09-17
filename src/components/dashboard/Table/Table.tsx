@@ -8,26 +8,26 @@ import Paper from "@mui/material/Paper";
 import "./Table.css";
 
 interface Row {
-  name: string;
-  trackingId: number;
+  adopter: string;
+  application: string;
   date: string;
   status: string;
 }
 
 function createData(
-  name: string,
-  trackingId: number,
+  adopter: string,
+  application: string,
   date: string,
   status: string
 ): Row {
-  return { name, trackingId, date, status };
+  return { adopter, application, date, status };
 }
 
 const rows: Row[] = [
-  createData("Lasania Chiken Fri", 18908424, "2 March 2022", "Approved"),
-  createData("Big Baza Bang ", 18908424, "2 March 2022", "Pending"),
-  createData("Mouth Freshner", 18908424, "2 March 2022", "Approved"),
-  createData("Cupcake", 18908421, "2 March 2022", "Delivered"),
+  createData("Mira Islam", "Tom", "2 March 2022", "Approved"),
+  createData("Fahmida Zaman ", "Stuart", "2 March 2022", "Pending"),
+  createData("Sabrina Abedin", "Mili", "2 March 2022", "Approved"),
+  createData("Rina Akter", "Angela", "2 March 2022", "Delivered"),
 ];
 
 const makeStyle = (status: string) => {
@@ -61,8 +61,8 @@ const BasicTable: React.FC = () => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Product</TableCell>
-              <TableCell align="left">Tracking ID</TableCell>
+              <TableCell>Adopter</TableCell>
+              <TableCell align="left">Application</TableCell>
               <TableCell align="left">Date</TableCell>
               <TableCell align="left">Status</TableCell>
               <TableCell align="left"></TableCell>
@@ -71,20 +71,20 @@ const BasicTable: React.FC = () => {
           <TableBody style={{ color: "white" }}>
             {rows.map((row) => (
               <TableRow
-                key={row.name}
+                key={row.adopter}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {row.name}
+                  {row.adopter}
                 </TableCell>
-                <TableCell align="left">{row.trackingId}</TableCell>
+                <TableCell align="left">{row.application}</TableCell>
                 <TableCell align="left">{row.date}</TableCell>
                 <TableCell align="left">
                   <span className="status" style={makeStyle(row.status)}>
                     {row.status}
                   </span>
                 </TableCell>
-                <TableCell align="left" className="Details">
+                <TableCell align="left" className="Details cursor-pointer">
                   Details
                 </TableCell>
               </TableRow>

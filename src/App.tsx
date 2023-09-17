@@ -6,6 +6,7 @@ import Home from "./components/HomePage/Home";
 import ForgotPassword from "./components/authentication/ForgetPassword";
 import ResetPassword from "./components/authentication/ResetPassword";
 import Dashboard from "./components/dashboard/Dashboard";
+import AdminLogin from "./components/authentication/adminLogin";
 
 const App = () => {
   return (
@@ -18,7 +19,8 @@ const App = () => {
         {/* Password Reset */}
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
-        {/* adminDashboard */}
+        {/* adminPanel */}
+        <Route path="/admin" element={<AdminLogin />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>

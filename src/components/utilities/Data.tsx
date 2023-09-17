@@ -91,19 +91,19 @@ export const UpdatesData = [
   {
     img: img1,
     name: "Andrew Thomas",
-    noti: "has ordered Apple smart watch 2500mh battery.",
+    noti: "has asked to adopt puppy Jamie .",
     time: "25 seconds ago",
   },
   {
     img: img2,
     name: "James Bond",
-    noti: "has received Samsung gadget for charging battery.",
+    noti: "Has recieved the delivery of cat Angela.",
     time: "30 minutes ago",
   },
   {
     img: img3,
     name: "Iron Man",
-    noti: "has ordered Apple smart watch, samsung Gear 2500mh battery.",
+    noti: "has ordered food for kitties.",
     time: "2 hours ago",
   },
 ];
