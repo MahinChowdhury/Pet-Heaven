@@ -7,13 +7,8 @@ const Sidebar = () => {
 
   return (
     <div className="flex items-center p-2 pt-4 flex-col shadow-lg">
-      {/* logo */}
       <div className="logo flex items-center justify-center mt-10 pl-4">
-        <img
-          src="src/assets/logo.png"
-          alt="logo"
-          className="logo h-16 w-16 pt-2"
-        />
+        <img src="/logo.png" alt="logo" className="logo h-16 w-16 pt-2" />
         <h1 className="pl-2 font-sans text-2xl font-bold text-red-900">
           Pet Heaven
         </h1>
