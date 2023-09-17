@@ -12,6 +12,7 @@ const Register = () => {
   const [confPasswordError, setConfPasswordError] = useState("");
   const [contactNum, setContactNum] = useState("");
   const [address, setAddress] = useState("");
+  const [role, SetRole] = useState("");
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -30,6 +31,8 @@ const Register = () => {
       setContactNum(value);
     } else if (name === "address") {
       setAddress(value);
+    } else if (name === "role") {
+      SetRole(value);
     }
   };
 
@@ -81,10 +84,12 @@ const Register = () => {
           password,
           contactNum,
           address,
+          role,
         })
         .then((res) => {
           console.log("Registration successful:", res.data);
-          navigate("/"); // Make sure you import and use the navigate function
+          if (role === "user") navigate("/");
+          else navigate("/admin/dashboard");
         })
         .catch((err) => {
           console.log("Registration failed:", err);
@@ -200,6 +205,25 @@ const Register = () => {
                   {confPasswordError && (
                     <span className="text-red-600">{confPasswordError}</span>
                   )}
+                </div>
+
+                <div className="mt-6">
+                  <label
+                    htmlFor="role"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Select a role
+                  </label>
+                  <select
+                    id="role"
+                    name="role"
+                    className="bg-gray-300 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    required
+                    onChange={handleInput}
+                  >
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                  </select>
                 </div>
 
                 <div className="mt-6">

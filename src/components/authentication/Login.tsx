@@ -61,7 +61,9 @@ const Login = () => {
         })
         .then((res) => {
           console.log("Login successful:", res.data);
-          navigate("/"); // Make sure you import and use the navigate function
+          console.log("Login successful:", res.data[0].role);
+          if (res.data[0].role === "user") navigate("/");
+          else navigate("/admin/dashboard");
         })
         .catch((err) => {
           console.log("Login failed:", err);

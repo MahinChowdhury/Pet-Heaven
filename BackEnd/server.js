@@ -31,14 +31,14 @@ console.log("Connected");
 //Regiter Requests
 app.post('/register', async (req, res) => {
     try {
-        const { username, email, password ,contactNum, address } = req.body;
+        const { username, email, password ,contactNum, address, role } = req.body;
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const sql = "INSERT INTO users (`name`,`email`,`password`,`contactNumber`,`address`,`role`) VALUES (?)";
-        const values = [username, email, hashedPassword,contactNum , address , 'user'];
+        const values = [username, email, hashedPassword,contactNum , address , role];
 
-        db.query(sql, [values], (err, data) => {
+        db.query(sql, [values], async (err, data) => {
             if (err) {
                 return res.status(500).json({ error: "Error registering user" });
             }
@@ -152,33 +152,6 @@ app.post('/reset-password/:token', async (req, res) => {
             return res.json({ message: "Password reset successful" });
         });
     });
-});
-
-//Admin Section
-
-app.post('/adminLogin', async (req, res) => {
-    try{
-        const {email,role,password} = req.body;
-        console.log(email + ' ' + password);
-        const sql = "SELECT * FROM users WHERE email = ?";
-        db.query(sql, [email], async (err, data) => {
-            if (err || data.length === 0) {
-                return res.status(401).json({ error: "Invalid credentials" });
-            }
-
-            const user = data[0];
-            const passwordMatch = user.password;
-            if (!passwordMatch) {
-                return res.status(401).json({ error: "Invalid credentials" });
-            }
-
-            return res.json(data);
-
-        });
-
-    }catch(error){
-        return res.status(500).json({ error: "Login error" });
-    }
 });
 
 
