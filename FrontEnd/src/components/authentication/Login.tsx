@@ -3,7 +3,6 @@ import FacebookIcon from "../../assets/icons/icons8-facebook.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import AuthUser from "./AuthUser";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -24,7 +23,6 @@ const Login = () => {
   };
 
   const navigate = useNavigate();
-  const { http, setToken } = AuthUser();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -56,16 +54,20 @@ const Login = () => {
       // Perform your login logic
       console.log("Login successful");
 
-      http
-        .post("/login", {
+      axios
+        .post("http://localhost:3001/login", {
           email,
           password,
         })
         .then((res) => {
-          //console.log(res.data);
-          setToken(res.data.user, res.data.access_token);
-          if (res.data.user.role === "user") navigate("/");
+          console.log("Login successful:", res.data);
+          console.log("Login successful:", res.data[0].role);
+          if (res.data[0].role === "user") navigate("/");
           else navigate("/admin/dashboard");
+        })
+        .catch((err) => {
+          console.log("Login failed:", err);
+          setLoginFailed(true);
         });
     }
   };

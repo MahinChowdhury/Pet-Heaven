@@ -23,7 +23,7 @@ export const SidebarData = [
   },
   {
     icon: FaList,
-    heading: "Adoption",
+    heading: "Adoptions",
   },
   {
     icon: GrUser,

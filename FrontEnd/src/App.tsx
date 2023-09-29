@@ -5,7 +5,8 @@ import Register from "./components/authentication/Register";
 import Home from "./components/HomePage/Home";
 import ForgotPassword from "./components/authentication/ForgetPassword";
 import ResetPassword from "./components/authentication/ResetPassword";
-import Dashboard from "./components/dashboard/Dashboard";
+import Dashboard from "./components/admin/Dashboard";
+import Petlist from "./components/petlist/Petlist";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         {/* adminPanel */}
         <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/petlists" element={<Petlist />} />
       </Routes>
     </BrowserRouter>
   );

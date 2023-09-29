@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import AuthUser from "./AuthUser";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -11,9 +10,9 @@ const Register = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confPasswordError, setConfPasswordError] = useState("");
-  const [contact_num, setContactNum] = useState("");
+  const [contactNum, setContactNum] = useState("");
   const [address, setAddress] = useState("");
-  const [role, SetRole] = useState("user");
+  const [role, SetRole] = useState("");
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -38,10 +37,6 @@ const Register = () => {
   };
 
   const navigate = useNavigate();
-  const { http, setToken } = AuthUser();
-  const csrfToken = document
-    .querySelector('meta[name="csrf-token"]')
-    ?.getAttribute("content");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -82,26 +77,22 @@ const Register = () => {
       // Perform your registration logic
       console.log("Registration successful");
 
-      http
-        .post(
-          "/register",
-          {
-            username,
-            email,
-            password,
-            contact_num,
-            address,
-            role,
-          },
-          {
-            headers: {
-              "X-CSRF-TOKEN": csrfToken,
-            },
-          }
-        )
+      axios
+        .post("http://localhost:3001/register", {
+          username,
+          email,
+          password,
+          contactNum,
+          address,
+          role,
+        })
         .then((res) => {
-          console.log(res.data);
-          navigate("/login");
+          console.log("Registration successful:", res.data);
+          if (role === "user") navigate("/");
+          else navigate("/admin/dashboard");
+        })
+        .catch((err) => {
+          console.log("Registration failed:", err);
         });
     }
   };
