@@ -7,9 +7,9 @@ import { TbPigMoney } from "react-icons/tb";
 import { FiDollarSign } from "react-icons/fi";
 import { GiReceiveMoney } from "react-icons/gi";
 
-import img1 from "../../../public/img1.png";
-import img2 from "../../../public/img2.png";
-import img3 from "../../../public/img3.png";
+import img1 from "/img1.png";
+import img2 from "/img2.png";
+import img3 from "/img3.png";
 
 // Sidebar Data
 export const SidebarData = [

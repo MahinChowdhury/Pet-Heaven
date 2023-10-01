@@ -1,9 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiFillCaretDown } from "react-icons/ai";
+import Cookies from "js-cookie";
 
 const Navlinks = () => {
   const [showPetList, setShowPetList] = useState(false);
+
+  const username = Cookies.get("username");
+  const navigate = useNavigate();
 
   const handlePetListClick = () => {
     setShowPetList(!showPetList);
@@ -13,18 +17,23 @@ const Navlinks = () => {
     setShowPetList(false);
   };
 
+  const handleLogout = () => {
+    Cookies.set("username", "");
+    navigate("/");
+  };
+
   return (
     <>
       <Link className="mx-2 text-xl font-semibold text-red-900" to="/">
         Home
       </Link>
       <div className="relative inline-block group">
-        <Link
+        <div
           className="mx-2 text-xl font-semibold text-red-900 cursor-pointer"
           onClick={handlePetListClick}
         >
           Pet List
-        </Link>
+        </div>
         {showPetList && (
           <div className="absolute w-28 z-10 mt-2 space-y-2 py-2 bg-white border border-gray-300 rounded-lg shadow-lg">
             <Link
@@ -55,6 +64,13 @@ const Navlinks = () => {
             >
               Others
             </Link>
+            <Link
+              className="block px-4 py-2 text-sm text-red-900 hover:bg-gray-200"
+              to="/allpets"
+              onClick={handlePetListLeave}
+            >
+              All Pets
+            </Link>
           </div>
         )}
       </div>
@@ -67,9 +83,16 @@ const Navlinks = () => {
       <Link className="mx-2 text-xl font-semibold text-red-900" to="/contact">
         Contact
       </Link>
-      <Link className="mx-2 text-xl font-semibold text-red-900" to="/login">
-        Login
-      </Link>
+
+      {username ? (
+        <div className="mx-2 text-xl font-semibold text-red-900">
+          Welcome, {username}! <button onClick={handleLogout}>Logout</button>
+        </div>
+      ) : (
+        <Link className="mx-2 text-xl font-semibold text-red-900" to="/login">
+          Login
+        </Link>
+      )}
     </>
   );
 };

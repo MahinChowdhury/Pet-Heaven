@@ -22,7 +22,7 @@ const CatList = () => {
   useEffect(() => {
     // Fetch pet data from the server when the component mounts
     axios
-      .get("http://localhost:3001/pets") // Adjust the URL to match your server endpoint
+      .get("http://localhost:3001/cats") // Adjust the URL to match your server endpoint
       .then((response) => {
         console.log(response.data);
         setRows(response.data); // Update the rows state with the fetched data

@@ -3,6 +3,7 @@ import FacebookIcon from "../../assets/icons/icons8-facebook.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -62,7 +63,8 @@ const Login = () => {
         .then((res) => {
           console.log("Login successful:", res.data);
           console.log("Login successful:", res.data[0].role);
-          if (res.data[0].role === "user") navigate("/");
+          Cookies.set("username", res.data[0].name);
+          if (res.data[0].role === "user") navigate("/others");
           else navigate("/admin/dashboard");
         })
         .catch((err) => {

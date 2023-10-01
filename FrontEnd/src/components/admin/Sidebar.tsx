@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { SidebarData } from "../utilities/Data";
 import { PiSignOutBold } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = ({ onSidebarItemClick }) => {
   const [selected, setSelected] = useState(0);
+
+  const navigate = useNavigate();
+  const handleSignOut = () => {
+    navigate("/");
+  };
 
   const handleItemClick = (index) => {
     setSelected(index);
@@ -41,7 +47,7 @@ const Sidebar = ({ onSidebarItemClick }) => {
           <div>
             <PiSignOutBold />
           </div>
-          <div>Signout</div>
+          <div onClick={handleSignOut}>Signout</div>
         </div>
       </div>
     </div>

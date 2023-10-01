@@ -85,13 +85,7 @@ app.post('/login', async (req, res) => {
 
 
             const user = data[0];
-            var passwordMatch;
-            if(user.role === "admin"){
-                passwordMatch = (password === user.password);
-            }
-            else{
-                passwordMatch = await bcrypt.compare(password, user.password);
-            }
+            const passwordMatch = await bcrypt.compare(password, user.password);
 
             if (!passwordMatch) {
                 return res.status(401).json({ error: "Invalid credentials" });
@@ -207,6 +201,60 @@ app.post('/addpet', upload.single('file'), async (req, res) => {
 
 app.get('/pets', (req, res) => {
     const sql = 'SELECT * FROM pets';
+  
+    db.query(sql, (err, results) => {
+      if (err) {
+        console.error('Database query error: ', err);
+        res.status(500).json({ message: 'Internal server error' });
+      } else {
+        res.json(results);
+      }
+    });
+  });
+
+
+  app.get('/cats', (req, res) => {
+    const sql = 'SELECT * FROM pets WHERE `TYPE` = "Cat"';
+  
+    db.query(sql, (err, results) => {
+      if (err) {
+        console.error('Database query error: ', err);
+        res.status(500).json({ message: 'Internal server error' });
+      } else {
+        res.json(results);
+      }
+    });
+  });
+
+  app.get('/dogs', (req, res) => {
+    const sql = 'SELECT * FROM pets WHERE `TYPE` = "Dog"';
+  
+    db.query(sql, (err, results) => {
+      if (err) {
+        console.error('Database query error: ', err);
+        res.status(500).json({ message: 'Internal server error' });
+      } else {
+        res.json(results);
+      }
+    });
+  });
+
+  app.get('/birds', (req, res) => {
+    const sql = 'SELECT * FROM pets WHERE `TYPE` = "Bird"';
+  
+    db.query(sql, (err, results) => {
+      if (err) {
+        console.error('Database query error: ', err);
+        res.status(500).json({ message: 'Internal server error' });
+      } else {
+        res.json(results);
+      }
+    });
+  });
+
+
+  app.get('/others', (req, res) => {
+    const sql = 'SELECT * FROM pets WHERE `TYPE` NOT IN ("Cat", "Dog", "Bird")';
   
     db.query(sql, (err, results) => {
       if (err) {

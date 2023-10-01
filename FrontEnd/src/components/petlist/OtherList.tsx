@@ -16,13 +16,13 @@ interface Row {
   image: string;
 }
 
-const BirdList = () => {
+const OtherList = () => {
   const [rows, setRows] = useState<Row[]>([]);
 
   useEffect(() => {
     // Fetch pet data from the server when the component mounts
     axios
-      .get("http://localhost:3001/birds") // Adjust the URL to match your server endpoint
+      .get("http://localhost:3001/Others") // Adjust the URL to match your server endpoint
       .then((response) => {
         console.log(response.data);
         setRows(response.data); // Update the rows state with the fetched data
@@ -54,4 +54,4 @@ const BirdList = () => {
   );
 };
 
-export default BirdList;
+export default OtherList;
