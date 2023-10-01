@@ -2,12 +2,14 @@ import { useState } from "react";
 import { SidebarData } from "../utilities/Data";
 import { PiSignOutBold } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Sidebar = ({ onSidebarItemClick }) => {
   const [selected, setSelected] = useState(0);
 
   const navigate = useNavigate();
   const handleSignOut = () => {
+    Cookies.set("username", "");
     navigate("/");
   };
 

@@ -64,7 +64,7 @@ const Login = () => {
           console.log("Login successful:", res.data);
           console.log("Login successful:", res.data[0].role);
           Cookies.set("username", res.data[0].name);
-          if (res.data[0].role === "user") navigate("/others");
+          if (res.data[0].role === "user") navigate("/allpets");
           else navigate("/admin/dashboard");
         })
         .catch((err) => {
