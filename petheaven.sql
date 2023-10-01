@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 29, 2023 at 12:39 PM
+-- Generation Time: Oct 01, 2023 at 06:56 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -20,6 +20,37 @@ SET time_zone = "+00:00";
 --
 -- Database: `petheaven`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pets`
+--
+
+CREATE TABLE `pets` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `breed` varchar(30) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `age` varchar(10) NOT NULL,
+  `gender` varchar(10) NOT NULL,
+  `price` int(11) NOT NULL,
+  `image` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pets`
+--
+
+INSERT INTO `pets` (`id`, `name`, `type`, `breed`, `description`, `age`, `gender`, `price`, `image`) VALUES
+(25, 'Mocha', 'Dog', 'Chihuahua', 'Mocha is affectionate,calm and exteranodvaosdfasdv', '2', 'Male', 350, '1.PNG'),
+(26, 'Nickel', 'Cat', 'Bengali Cat', 'Nickel is a sweet and extremely curious hdasof haosdf vasndofds fgasodfh', '1', 'Female', 450, '2.PNG'),
+(27, 'Piglet', 'Cat', 'Domestic Short Hair', 'Piglet is a kitten with a great dreams of finding the perfect one! She\'s hasof vhsoadv sdvoasn ytwowa goyahak', '0.6', 'Female', 500, '3.PNG'),
+(28, 'Shell-lock Holmes', 'Tortoise', 'Russian', 'This adorable Russian tortoise is Shell-lock Holmes. He enjoys sdga dfasv vhhao pasdf', '13', 'Male', 550, '8.PNG'),
+(29, 'Siimba and Nala', 'Rabbit', 'Rex Mix', 'Simba and Nala are a bonded pair of medium-large rabbits. Both born sdaf yowqa qodfjhw woudf.', '3', 'Male', 32, '7.PNG'),
+(30, 'Jackson', 'Guinea Pig', 'Short-Haired', 'It hanbdo adsf aslge qw pufea nbnvbuia fhwsiovc gfbeicva opqfwegf bqwicsadfldhg gkasdgf.', '0.3', 'Male', 30, '6.PNG'),
+(31, 'LGR Lovebirds', 'Parrot', 'Lovebird', 'many lovebirds waiting for their perfect home. Many of them are very friendly and would love to keep you and you family company.', '1.4', 'admin', 650, '5.PNG');
 
 -- --------------------------------------------------------
 
@@ -51,6 +82,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `contactNumber`, `addres
 --
 
 --
+-- Indexes for table `pets`
+--
+ALTER TABLE `pets`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -59,6 +96,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `pets`
+--
+ALTER TABLE `pets`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `users`

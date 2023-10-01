@@ -7,6 +7,9 @@ import ForgotPassword from "./components/authentication/ForgetPassword";
 import ResetPassword from "./components/authentication/ResetPassword";
 import Dashboard from "./components/admin/Dashboard";
 import Petlist from "./components/petlist/Petlist";
+import DogList from "./components/petlist/DogList";
+import CatList from "./components/petlist/CatList";
+import BirdList from "./components/petlist/BirdList";
 
 const App = () => {
   return (
@@ -21,7 +24,10 @@ const App = () => {
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         {/* adminPanel */}
         <Route path="/admin/dashboard" element={<Dashboard />} />
-        <Route path="/petlists" element={<Petlist />} />
+        <Route path="/others" element={<Petlist />} />
+        <Route path="/dogs" element={<DogList />} />
+        <Route path="/cats" element={<CatList />} />
+        <Route path="/birds" element={<BirdList />} />
       </Routes>
     </BrowserRouter>
   );

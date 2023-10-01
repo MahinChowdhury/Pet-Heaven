@@ -50,10 +50,10 @@ const Navlinks = () => {
             </Link>
             <Link
               className="block px-4 py-2 text-sm text-red-900 hover:bg-gray-200"
-              to="/rabbits"
+              to="/others"
               onClick={handlePetListLeave}
             >
-              Rabbits
+              Others
             </Link>
           </div>
         )}
