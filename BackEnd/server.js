@@ -265,8 +265,44 @@ app.get('/pets', (req, res) => {
       }
     });
   });
-  
 
+  app.get("/pets/:id", (req, res) => {
+    const petId = req.params.id;
+    const query = "SELECT * FROM pets WHERE id = ?";
+  
+    db.query(query, [petId], (err, results) => { // Change `res` to `results`
+      if (err) {
+        console.error("Database query error: " + err);
+        res.status(500).json({ error: "Error fetching pet data" });
+      } else {
+        if (results.length === 0) {
+          res.status(404).json({ error: "Pet not found" });
+        } else {
+          res.json(results[0]);
+        }
+      }
+    });
+  });  
+
+  app.post("/addOrder", (req, res) => {
+    const { name, email, contact, address, pName } = req.body;
+    const currentDate = new Date();
+    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+    const formattedDate = currentDate.toLocaleDateString("en-GB", options);
+    
+    const sql =
+      "INSERT INTO adoptions (`adopter`, `petname`, `contact`, `address`, `email`, `date`, `status`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    const values = [name, pName, contact, address, email, formattedDate, "Processing"];
+  
+    db.query(sql, values, async (err, data) => {
+      if (err) {
+        return res.status(500).json({ error: "Error adding adoption" });
+      }
+      return res.status(200).json({ message: "Adoption added successfully.", data });
+    });
+  });
+  
+  
 app.listen(3001, () => {
     console.log("listening at 3001");
 });

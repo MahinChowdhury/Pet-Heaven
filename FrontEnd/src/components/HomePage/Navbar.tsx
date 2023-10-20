@@ -3,6 +3,7 @@ import CloseButton from "../utilities/CloseButton";
 import MenuButton from "../utilities/MenuButton";
 import Navlinks from "./Navlinks";
 import { Link } from "react-router-dom";
+import logo from "/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsopen] = useState(false);
@@ -15,7 +16,7 @@ const Navbar = () => {
     <>
       <header className="bg-amber-100 sticky top-0 flex-wrap z-[20] mx-auto flex w-full items-center justify-between border-gray-500 p-2">
         <div className="ml-5 logo h-16 w-16 pt-2">
-          <img src="src\assets\logo.png" alt="logo" />
+          <img src={logo} alt="logo" />
         </div>
 
         <Link className="ml-3 font-sans text-2xl font-bold text-red-900" to="/">

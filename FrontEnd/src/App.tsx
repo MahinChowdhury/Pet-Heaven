@@ -11,6 +11,8 @@ import DogList from "./components/petlist/DogList";
 import CatList from "./components/petlist/CatList";
 import BirdList from "./components/petlist/BirdList";
 import OtherList from "./components/petlist/OtherList";
+import SinglePet from "./components/petlist/SinglePet";
+import AdoptionSuccess from "./components/utilities/AdoptionSuccess";
 
 const App = () => {
   return (
@@ -30,6 +32,8 @@ const App = () => {
         <Route path="/cats" element={<CatList />} />
         <Route path="/birds" element={<BirdList />} />
         <Route path="/others" element={<OtherList />} />
+        <Route path="pets/:id" element={<SinglePet />} />
+        <Route path="/adoptionSuccess" element={<AdoptionSuccess />} />
       </Routes>
     </BrowserRouter>
   );

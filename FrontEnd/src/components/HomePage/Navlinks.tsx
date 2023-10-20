@@ -10,7 +10,7 @@ const Navlinks = () => {
   const navigate = useNavigate();
 
   const handlePetListClick = () => {
-    setShowPetList(!showPetList);
+    setShowPetList(true);
   };
 
   const handlePetListLeave = () => {
@@ -27,15 +27,16 @@ const Navlinks = () => {
       <Link className="mx-2 text-xl font-semibold text-red-900" to="/">
         Home
       </Link>
-      <div className="relative inline-block group">
-        <div
-          className="mx-2 text-xl font-semibold text-red-900 cursor-pointer"
-          onClick={handlePetListClick}
-        >
+      <div
+        className="relative inline-block group"
+        onMouseEnter={handlePetListClick}
+        onMouseLeave={handlePetListLeave}
+      >
+        <div className="mx-2 text-xl font-semibold text-red-900 cursor-pointer">
           Pet List
         </div>
         {showPetList && (
-          <div className="absolute w-28 z-10 mt-2 space-y-2 py-2 bg-white border border-gray-300 rounded-lg shadow-lg">
+          <div className="absolute w-28 z-10 space-y-2 py-2 bg-white border border-gray-300 rounded-lg shadow-lg">
             <Link
               className="block px-4 py-2 text-sm text-red-900 hover:bg-gray-200"
               to="/cats"

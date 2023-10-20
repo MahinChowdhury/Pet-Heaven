@@ -46,6 +46,7 @@ const Petlist = () => {
               imagesrc={`http://localhost:3001/petImages/` + row.image}
               breed={row.breed}
               price={row.price}
+              id={row.id}
             />
           </div>
         ))}

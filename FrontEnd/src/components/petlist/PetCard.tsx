@@ -9,6 +9,8 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 
+import { Link } from "react-router-dom";
+
 interface Tag {
   cost: string;
   breed: string;
@@ -20,6 +22,7 @@ interface Props {
   breed: string;
   description: string;
   price: string;
+  id: string;
 }
 
 const PetCard = (props: Props) => {
@@ -57,13 +60,12 @@ const PetCard = (props: Props) => {
           <Typography color="gray">{props.description}</Typography>
         </CardBody>
         <CardFooter className="pt-3">
-          <button
+          <Link
+            to={`/pets/${props.id}`}
             className="block w-full select-none rounded-lg bg-gray-900 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-            type="button"
-            data-ripple-light="true"
           >
             Adopt Now
-          </button>
+          </Link>
         </CardFooter>
       </Card>
     </>
