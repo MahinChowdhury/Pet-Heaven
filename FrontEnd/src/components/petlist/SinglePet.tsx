@@ -49,7 +49,7 @@ const SinglePet = () => {
       />
       <div className="bg-gray-100 min-h-screen p-4">
         <div className="container mx-auto p-4">
-          <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+          <div className="max-w-xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
             <img
               src={`http://localhost:3001/petImages/${petData.image}`}
               alt={petData.name}

@@ -87,7 +87,7 @@ const Navlinks = () => {
 
       {username ? (
         <div className="mx-2 text-xl font-semibold text-red-900">
-          Welcome, {username}! <button onClick={handleLogout}>Logout</button>
+          {username}! <button onClick={handleLogout}>Logout</button>
         </div>
       ) : (
         <Link className="mx-2 text-xl font-semibold text-red-900" to="/login">

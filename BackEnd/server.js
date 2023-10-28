@@ -266,6 +266,33 @@ app.get('/pets', (req, res) => {
     });
   });
 
+  app.get('/petsFilter', (req, res) => {
+    const { breed , age , gender , type} = req.query;
+
+    let sql = "SELECT * from pets WHERE breed = ? AND age = ? AND gender = ?";
+
+    const values = [breed,age,gender];
+
+    if(type !== ""){
+      if(type === "others"){
+        sql += " AND type NOT IN ('Dog','Cat','Birds')";
+      }
+      else{
+        sql += ' AND type = ?';
+        values.push(type);
+      }
+    }
+
+    db.query(sql, values, (err, data) => {
+      if (err) {
+        console.error('Database query error:', err);
+        res.status(500).json({ error: 'Error fetching pet data' });
+      } else {
+        res.json(data);
+      }
+    });
+  });
+
   app.get("/pets/:id", (req, res) => {
     const petId = req.params.id;
     const query = "SELECT * FROM pets WHERE id = ?";
