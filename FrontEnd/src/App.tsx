@@ -18,6 +18,8 @@ import TortoiseList from "./components/petlist/TortoiseList";
 import HorseList from "./components/petlist/HorseList";
 import Process from "./components/Adoption/Process";
 import Contact from "./components/Adoption/Contact";
+import Profile from "./components/user/Profile";
+import Recent from "./components/user/Recent";
 
 const App = () => {
   return (
@@ -44,6 +46,8 @@ const App = () => {
         <Route path="/adoptionSuccess" element={<AdoptionSuccess />} />
         <Route path="/process" element={<Process />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/recent" element={<Recent />} />
       </Routes>
     </BrowserRouter>
   );

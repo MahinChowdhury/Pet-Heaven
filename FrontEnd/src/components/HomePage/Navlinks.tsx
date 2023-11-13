@@ -181,17 +181,17 @@ const Navlinks = () => {
               <div className="absolute w-28 z-10 space-y-2 py-2 bg-yellow-50 border border-gray-300 rounded-lg shadow-lg">
                 <Link
                   className="block px-4 py-2 text-sm text-red-900 hover:bg-gray-200"
-                  to="/process"
+                  to="/profile"
                   onClick={handleOtherListLeave}
                 >
                   Profile
                 </Link>
                 <Link
                   className="block px-4 py-2 text-sm text-red-900 hover:bg-gray-200"
-                  to="/contact"
+                  to="/recent"
                   onClick={handleOtherListLeave}
                 >
-                  Recent Orders
+                  Recent Adoptions
                 </Link>
                 <button
                   className="ml-3 py-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none  dark:border-gray-700 dark:text-white dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"

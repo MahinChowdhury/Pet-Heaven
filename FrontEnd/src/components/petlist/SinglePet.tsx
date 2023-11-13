@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../HomePage/Navbar";
+import Cookies from "js-cookie";
 
 import {
   Card,
@@ -39,6 +40,20 @@ const SinglePet = () => {
         console.error("Error fetching pet data:", error);
       });
   }, [id]);
+
+  const navigate = useNavigate();
+
+  const handleAdoptNow = () => {
+    const username = Cookies.get("username");
+
+    console.log(username);
+
+    if (username === "") {
+      navigate("/login");
+    } else {
+      openModal();
+    }
+  };
 
   return (
     <>
@@ -81,7 +96,7 @@ const SinglePet = () => {
               <p className="text-lg mb-4">{petData.description}</p>
               <div className="mt-6">
                 <button
-                  onClick={openModal}
+                  onClick={handleAdoptNow}
                   className="block w-full select-none rounded-lg bg-gray-900 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 >
                   Adopt Now

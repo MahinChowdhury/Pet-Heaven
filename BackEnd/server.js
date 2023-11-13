@@ -355,13 +355,71 @@ app.get('/pets', (req, res) => {
     
     const sql =
       "INSERT INTO adoptions (`adopter`, `petname`, `contact`, `address`, `email`, `date`, `status`) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    const values = [name, pName, contact, address, email, formattedDate, "Processing"];
+    const values = [name, pName, contact, address, email, formattedDate, "Pending"];
   
     db.query(sql, values, async (err, data) => {
       if (err) {
         return res.status(500).json({ error: "Error adding adoption" });
       }
       return res.status(200).json({ message: "Adoption added successfully.", data });
+    });
+  });
+
+  app.get("/userProfile", (req, res) => {
+    const userName = req.query.username;
+    const query = "SELECT * FROM users WHERE name = ?";
+
+    //console.log(userName)
+  
+    db.query(query, [userName], (err, results) => { // Change `res` to `results`
+      if (err) {
+        console.error("Database query error: " + err);
+        res.status(500).json({ error: "Error fetching user data" });
+      } else {
+        if (results.length === 0) {
+          res.status(404).json({ error: "User not found" });
+        } else {
+          res.json(results[0]);
+        }
+      }
+    });
+  }); 
+
+  app.get("/recent", (req, res) => {
+    const userName = req.query.username;
+    const query = "SELECT * FROM adoptions WHERE adopter = ?";
+
+    //console.log(userName)
+  
+    db.query(query, [userName], (err, results) => { // Change `res` to `results`
+      if (err) {
+        console.error("Database query error: " + err);
+        res.status(500).json({ error: "Error fetching user data" });
+      } else {
+        if (results.length === 0) {
+          res.status(404).json({ error: "User not found" });
+        } else {
+          res.json(results);
+        }
+      }
+    });
+  }); 
+
+  app.delete("/deleteAdoption/:id", (req, res) => {
+    const adoptionId = req.params.id;
+  
+    // SQL query to delete the adoption with the given ID
+    const sql = "DELETE FROM adoptions WHERE id = ?";
+  
+    // Execute the SQL query
+    db.query(sql, [adoptionId], (err, result) => {
+      if (err) {
+        console.error("Error deleting adoption:", err);
+        res.status(500).json({ error: "Internal Server Error" });
+      } else {
+        console.log("Adoption deleted successfully");
+        res.status(200).json({ message: "Adoption canceled successfully" });
+      }
     });
   });
   
