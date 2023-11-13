@@ -345,7 +345,42 @@ app.get('/pets', (req, res) => {
         }
       }
     });
-  });  
+  });
+  
+  app.get("/allAdoptions",(req,res) => {
+    const query = "SELECT * from adoptions";
+
+    db.query(query, (err, results) => { // Change `res` to `results`
+      if (err) {
+        console.error("Database query error: " + err);
+        res.status(500).json({ error: "Error fetching adoption data" });
+      } else {
+        if (results.length === 0) {
+          res.status(404).json({ error: "Adoptions not found" });
+        } else {
+          res.json(results);
+        }
+      }
+    });
+  })
+
+  app.get("/allUsers",(req,res) => {
+    const query = "SELECT * from users";
+
+    db.query(query, (err, results) => { // Change `res` to `results`
+      if (err) {
+        console.error("Database query error: " + err);
+        res.status(500).json({ error: "Error fetching user data" });
+      } else {
+        if (results.length === 0) {
+          res.status(404).json({ error: "Users not found" });
+        } else {
+          res.json(results);
+        }
+      }
+    });
+
+  })
 
   app.post("/addOrder", (req, res) => {
     const { name, email, contact, address, pName } = req.body;

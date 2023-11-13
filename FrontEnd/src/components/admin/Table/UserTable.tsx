@@ -6,29 +6,15 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./Table.css";
+import { useEffect, useState } from "react";
 
 interface Row {
-  adopter: string;
-  application: string;
-  date: string;
-  status: string;
+  id: string;
+  name: string;
+  email: string;
+  contactNumber: string;
+  address: string;
 }
-
-function createData(
-  adopter: string,
-  application: string,
-  date: string,
-  status: string
-): Row {
-  return { adopter, application, date, status };
-}
-
-const rows: Row[] = [
-  createData("Mira Islam", "Tom", "2 March 2022", "Approved"),
-  createData("Fahmida Zaman ", "Stuart", "2 March 2022", "Pending"),
-  createData("Sabrina Abedin", "Mili", "2 March 2022", "Approved"),
-  createData("Rina Akter", "Angela", "2 March 2022", "Delivered"),
-];
 
 const makeStyle = (status: string) => {
   if (status === "Approved") {
@@ -50,6 +36,20 @@ const makeStyle = (status: string) => {
 };
 
 const UserTable: React.FC = () => {
+  const [rows, setRows] = useState<Row[]>([]);
+
+  useEffect(() => {
+    // Fetch adoptions data from the server when the component mounts
+    fetch("http://localhost:3001/allUsers")
+      .then((response) => response.json())
+      .then((data) => {
+        setRows(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching adoption data:", error);
+      });
+  }, []);
+
   return (
     <div className="Table p-10 rounded-3xl">
       <div className="flex flex-wrap justify-between mb-4">
@@ -66,33 +66,24 @@ const UserTable: React.FC = () => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>User Name</TableCell>
+              <TableCell>Id</TableCell>
+              <TableCell align="left">Name</TableCell>
               <TableCell align="left">Email</TableCell>
-              <TableCell align="left">Phone</TableCell>
+              <TableCell align="left">Contact</TableCell>
               <TableCell align="left">Address</TableCell>
-              <TableCell align="left">Age</TableCell>
-              <TableCell align="left"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody style={{ color: "white" }}>
             {rows.map((row) => (
               <TableRow
-                key={row.adopter}
+                key={row.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" scope="row">
-                  {row.adopter}
-                </TableCell>
-                <TableCell align="left">{row.application}</TableCell>
-                <TableCell align="left">{row.date}</TableCell>
-                <TableCell align="left">
-                  <span className="status" style={makeStyle(row.status)}>
-                    {row.status}
-                  </span>
-                </TableCell>
-                <TableCell align="left" className="Details cursor-pointer">
-                  Details
-                </TableCell>
+                <TableCell align="left">{row.id}</TableCell>
+                <TableCell align="left">{row.name}</TableCell>
+                <TableCell align="left">{row.email}</TableCell>
+                <TableCell align="left">{row.contactNumber}</TableCell>
+                <TableCell align="left">{row.address}</TableCell>
               </TableRow>
             ))}
           </TableBody>
