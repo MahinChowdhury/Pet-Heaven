@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import logo from "/logo.png";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -101,7 +102,7 @@ const Register = () => {
     <>
       <header className="bg-amber-100 sticky top-0 flex-wrap z-[20] mx-auto flex w-full items-center justify-start border-gray-500">
         <div className="ml-5 logo h-16 w-16 pt-2">
-          <img src="src\assets\logo.png" alt="logo" />
+          <img src={logo} alt="logo" />
         </div>
 
         <Link className="ml-3 font-sans text-2xl font-bold text-red-900" to="/">

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+import logo from "/logo.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -78,7 +79,7 @@ const Login = () => {
     <>
       <header className="bg-amber-100 sticky top-0 flex-wrap z-[20] mx-auto flex w-full items-center justify-start border-gray-500">
         <div className="ml-5 logo h-16 w-16 pt-2">
-          <img src="src\assets\logo.png" alt="logo" />
+          <img src={logo} alt="logo" />
         </div>
 
         <Link className="ml-3 font-sans text-2xl font-bold text-red-900" to="/">

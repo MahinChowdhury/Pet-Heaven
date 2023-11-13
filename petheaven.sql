@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 29, 2023 at 08:26 PM
+-- Generation Time: Nov 13, 2023 at 08:51 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -43,8 +43,12 @@ CREATE TABLE `adoptions` (
 --
 
 INSERT INTO `adoptions` (`id`, `adopter`, `petname`, `contact`, `address`, `email`, `date`, `status`) VALUES
-(6, 'Mahin', 'Jackson', '01839963763', 'Dhaka,Bangladesh', 'mahin00021@gmail.com', '20/10/2023', 'Processing'),
-(7, 'Ehsanul Karim Talha', 'Nickel', '01871212436', 'Mirpur,Dhaka', 'talha39@gmail.com', '21/10/2023', 'Processing');
+(8, 'Mahin', 'LGR Lovebirds', '01839963763', 'Dhaka,Bangladesh', 'mahin00021@gmail.com', '14/11/2023', 'Delivered'),
+(10, 'Mahin', 'Jackson', '01839963763', 'Dhaka,Bangladesh', 'mahin00021@gmail.com', '14/11/2023', 'Pending'),
+(11, 'Mahin', 'Siimba and Nala', '01839963763', 'Mirpur,Dhaka', 'mahin00021@gmail.com', '14/11/2023', 'Pending'),
+(12, 'Mahin', 'Piglet', '01839963763', 'Jessore,Bangladesh', 'mahin00021@gmail.com', '14/11/2023', 'Pending'),
+(13, 'Talha', 'Siimba and Nala', '01871212436', 'Mirpur,Dhaka', 'talha39@gmail.com', '14/11/2023', 'Processing'),
+(14, 'Talha', 'Mocha', '01871212436', 'Jessore,Bangladesh', 'talha39@gmail.com', '14/11/2023', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -100,7 +104,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `contactNumber`, `address`, `role`, `token`) VALUES
 (5, 'mahin', 'mahin00021@gmail.com', '$2b$10$eQW9uRuApXxrrp01ur1EPe9iaG1Zus/0.XHKjWFZrce9/51YVaM9S', '01839963763', 'Dhaka,Bangladesh', 'user', '5091ade6c5a3f169920d174751eb66d321bf430a'),
-(6, 'admin', 'admin@admin.com', '123456', '0123456789', 'Dhaka', 'admin', NULL);
+(7, 'admin', 'admin@admin.com', '$2b$10$CsrHT4oS79.l1E6IsrjBfuvpByeHGFYiZ7f.YErQGc7lAuNlU0VxG', '01839963763', 'Dhaka,Bangladesh', 'admin', NULL),
+(8, 'Talha', 'talha39@gmail.com', '$2b$10$VMx4Z7Lh/4JLU99QdhvzBe/2scYtOJ7RALzqXRtngQPKOWbXZT/bC', '01871212436', 'Mirpur,Dhaka', 'user', NULL);
 
 --
 -- Indexes for dumped tables
@@ -132,7 +137,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `adoptions`
 --
 ALTER TABLE `adoptions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `pets`
@@ -144,7 +149,7 @@ ALTER TABLE `pets`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

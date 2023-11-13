@@ -1,9 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const AdoptModal = ({ isOpen, onClose, petName }) => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState(Cookies.get("username"));
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [contact, setContact] = useState("");
