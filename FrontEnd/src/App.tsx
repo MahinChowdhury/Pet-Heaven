@@ -20,6 +20,7 @@ import Process from "./components/Adoption/Process";
 import Contact from "./components/Adoption/Contact";
 import Profile from "./components/user/Profile";
 import Recent from "./components/user/Recent";
+import About from "./components/Adoption/About";
 
 const App = () => {
   return (
@@ -48,6 +49,7 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/recent" element={<Recent />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>
   );
