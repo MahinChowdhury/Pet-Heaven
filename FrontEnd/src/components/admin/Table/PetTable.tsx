@@ -131,9 +131,6 @@ const PetTable: React.FC = () => {
                 <TableCell align="left">{row.gender}</TableCell>
                 <TableCell align="left">{row.age}</TableCell>
                 <TableCell align="left">{row.price}</TableCell>
-                <TableCell align="left" className="Details cursor-pointer">
-                  Details
-                </TableCell>
               </TableRow>
             ))}
           </TableBody>

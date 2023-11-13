@@ -16,13 +16,13 @@ interface Row {
   image: string;
 }
 
-const OtherList = () => {
+const TortoiseList = () => {
   const [rows, setRows] = useState<Row[]>([]);
   const [filteredRows, setFilteredRows] = useState<Row[]>([]);
   const [showFilterStatus, setShowFilterStatus] = useState("");
 
   const fetchFilteredData = (filters) => {
-    filters["type"] = "Others";
+    filters["type"] = "Tortoise";
     console.log(filters);
 
     axios
@@ -30,6 +30,9 @@ const OtherList = () => {
       .then((response) => {
         console.log(response.data);
         setFilteredRows(response.data); // Update the filteredRows state with the filtered data
+        if (filteredRows.length === 0) {
+          setShowFilterStatus("No such Pet Found!");
+        }
       })
       .catch((error) => {
         console.error("Error fetching filtered pet data:", error);
@@ -39,13 +42,10 @@ const OtherList = () => {
   useEffect(() => {
     // Fetch pet data from the server when the component mounts
     axios
-      .get("http://localhost:3001/Others") // Adjust the URL to match your server endpoint
+      .get("http://localhost:3001/tortoise") // Adjust the URL to match your server endpoint
       .then((response) => {
         console.log(response.data);
-        setRows(response.data); // Update the rows state with the fetched
-        if (filteredRows.length === 0) {
-          setShowFilterStatus("No such Pet Found!");
-        }
+        setRows(response.data); // Update the rows state with the fetched data
       })
       .catch((error) => {
         console.error("Error fetching pet data:", error);
@@ -56,12 +56,6 @@ const OtherList = () => {
     <>
       <Navbar />
       <PetFilter onSearch={fetchFilteredData} />
-
-      {filteredRows.length === 0 && (
-        <div className="text-center text-red-600 text-md font-semibold">
-          {showFilterStatus}
-        </div>
-      )}
 
       {filteredRows.length === 0 && (
         <div className="text-center text-red-600 text-md font-semibold">
@@ -100,4 +94,4 @@ const OtherList = () => {
   );
 };
 
-export default OtherList;
+export default TortoiseList;

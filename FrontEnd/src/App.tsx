@@ -10,9 +10,14 @@ import Petlist from "./components/petlist/Petlist";
 import DogList from "./components/petlist/DogList";
 import CatList from "./components/petlist/CatList";
 import BirdList from "./components/petlist/BirdList";
-import OtherList from "./components/petlist/OtherList";
 import SinglePet from "./components/petlist/SinglePet";
 import AdoptionSuccess from "./components/utilities/AdoptionSuccess";
+import RabbitList from "./components/petlist/RabbitList";
+import GuineaList from "./components/petlist/GuineaList";
+import TortoiseList from "./components/petlist/TortoiseList";
+import HorseList from "./components/petlist/HorseList";
+import Process from "./components/Adoption/Process";
+import Contact from "./components/Adoption/Contact";
 
 const App = () => {
   return (
@@ -31,9 +36,14 @@ const App = () => {
         <Route path="/dogs" element={<DogList />} />
         <Route path="/cats" element={<CatList />} />
         <Route path="/birds" element={<BirdList />} />
-        <Route path="/others" element={<OtherList />} />
+        <Route path="/rabbit" element={<RabbitList />} />
+        <Route path="/guinea" element={<GuineaList />} />
+        <Route path="/tortoise" element={<TortoiseList />} />
+        <Route path="/horse" element={<HorseList />} />
         <Route path="pets/:id" element={<SinglePet />} />
         <Route path="/adoptionSuccess" element={<AdoptionSuccess />} />
+        <Route path="/process" element={<Process />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </BrowserRouter>
   );

@@ -29,10 +29,6 @@ export const SidebarData = [
     icon: GrUser,
     heading: "Users",
   },
-  {
-    icon: GrSettingsOption,
-    heading: "Settings",
-  },
 ];
 
 export const CardsData = [

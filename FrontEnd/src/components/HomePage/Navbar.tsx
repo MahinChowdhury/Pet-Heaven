@@ -23,7 +23,7 @@ const Navbar = () => {
           Pet Heaven
         </Link>
 
-        <div className="hidden w-1/2 lg:flex justify-between mx-auto">
+        <div className="hidden w-2/3 lg:flex justify-between mx-auto">
           <Navlinks />
         </div>
 

@@ -253,8 +253,44 @@ app.get('/pets', (req, res) => {
   });
 
 
-  app.get('/others', (req, res) => {
-    const sql = 'SELECT * FROM pets WHERE `TYPE` NOT IN ("Cat", "Dog", "Bird")';
+  app.get('/rabbit', (req, res) => {
+    const sql = 'SELECT * FROM pets WHERE `TYPE` = "Rabbit"';
+  
+    db.query(sql, (err, results) => {
+      if (err) {
+        console.error('Database query error: ', err);
+        res.status(500).json({ message: 'Internal server error' });
+      } else {
+        res.json(results);
+      }
+    });
+  });
+  app.get('/guinea', (req, res) => {
+    const sql = 'SELECT * FROM pets WHERE `TYPE` = "Guinea Pig"';
+  
+    db.query(sql, (err, results) => {
+      if (err) {
+        console.error('Database query error: ', err);
+        res.status(500).json({ message: 'Internal server error' });
+      } else {
+        res.json(results);
+      }
+    });
+  });
+  app.get('/horse', (req, res) => {
+    const sql = 'SELECT * FROM pets WHERE `TYPE` = "Horse"';
+  
+    db.query(sql, (err, results) => {
+      if (err) {
+        console.error('Database query error: ', err);
+        res.status(500).json({ message: 'Internal server error' });
+      } else {
+        res.json(results);
+      }
+    });
+  });
+  app.get('/tortoise', (req, res) => {
+    const sql = 'SELECT * FROM pets WHERE `TYPE` = "Tortoise"';
   
     db.query(sql, (err, results) => {
       if (err) {

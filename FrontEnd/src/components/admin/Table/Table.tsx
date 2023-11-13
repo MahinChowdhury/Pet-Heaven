@@ -84,9 +84,6 @@ const BasicTable: React.FC = () => {
                     {row.status}
                   </span>
                 </TableCell>
-                <TableCell align="left" className="Details cursor-pointer">
-                  Details
-                </TableCell>
               </TableRow>
             ))}
           </TableBody>
