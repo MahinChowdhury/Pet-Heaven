@@ -185,8 +185,8 @@ app.post('/addpet', upload.single('file'), async (req, res) => {
       const fileUrl = `${filename}`;
   
       // Perform the database insertion here
-      const sql = "INSERT INTO pets (`name`, `type`, `breed`, `description`, `age`, `gender`, `price`, `image`) VALUES (?)";
-      const values = [name, type, breed, description, age, gender, price, fileUrl];
+      const sql = "INSERT INTO pets (`name`, `type`, `breed`, `description`, `age`, `gender`, `price`, `image` , `available`) VALUES (?)";
+      const values = [name, type, breed, description, age, gender, price, fileUrl , "yes"];
   
       db.query(sql, [values], async (err, data) => {
         if (err) {
