@@ -78,10 +78,10 @@ const PetTable: React.FC = () => {
   }, []);
 
   return (
-    <div className="Table p-10 rounded-3xl">
-      <div className="flex flex-wrap justify-between mb-4">
+    <div className="Table rounded-3xl">
+      <div className="flex flex-wrap justify-between mb-2">
         <div>
-          <h3 className="mb-6">All Pets</h3>
+          <h3 className="mb-2">All Pets</h3>
           <img src="../../../BackEnd/petImages/J01 (9).jpg" alt="" />
         </div>
         <button
@@ -92,50 +92,55 @@ const PetTable: React.FC = () => {
         </button>
         <AddPetModal isOpen={isModalOpen} onClose={closeModal} />
       </div>
-
-      <TableContainer
-        className="px-6 py-4"
-        component={Paper}
-        style={{ boxShadow: "0px 13px 20px 0px #80808029" }}
-      >
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell></TableCell>
-              <TableCell align="left">Pet Name</TableCell>
-              <TableCell align="left">Type</TableCell>
-              <TableCell align="left">Breed</TableCell>
-              <TableCell align="left">Description</TableCell>
-              <TableCell align="left">Gender</TableCell>
-              <TableCell align="left">Age</TableCell>
-              <TableCell align="left">Price</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody style={{ color: "white" }}>
-            {rows.map((row) => (
-              <TableRow
-                key={row.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  <img
-                    src={`http://localhost:3001/petImages/` + row.image}
-                    alt=""
-                    className="w-24"
-                  />
-                </TableCell>
-                <TableCell align="left">{row.name}</TableCell>
-                <TableCell align="left">{row.type}</TableCell>
-                <TableCell align="left">{row.breed}</TableCell>
-                <TableCell align="left">{row.description}</TableCell>
-                <TableCell align="left">{row.gender}</TableCell>
-                <TableCell align="left">{row.age}</TableCell>
-                <TableCell align="left">{row.price}</TableCell>
+      <div style={{ overflowX: "auto" }}>
+        <TableContainer
+          className="py-4"
+          component={Paper}
+          style={{
+            boxShadow: "0px 13px 20px 0px #80808029",
+            maxHeight: "650px", // Set the max height as per your requirement
+            overflowY: "auto",
+          }}
+        >
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell></TableCell>
+                <TableCell align="left">Pet Name</TableCell>
+                <TableCell align="left">Type</TableCell>
+                <TableCell align="left">Breed</TableCell>
+                <TableCell align="left">Description</TableCell>
+                <TableCell align="left">Gender</TableCell>
+                <TableCell align="left">Age</TableCell>
+                <TableCell align="left">Price</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody style={{ color: "white" }}>
+              {rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <img
+                      src={`http://localhost:3001/petImages/` + row.image}
+                      alt=""
+                      className="w-24"
+                    />
+                  </TableCell>
+                  <TableCell align="left">{row.name}</TableCell>
+                  <TableCell align="left">{row.type}</TableCell>
+                  <TableCell align="left">{row.breed}</TableCell>
+                  <TableCell align="left">{row.description}</TableCell>
+                  <TableCell align="left">{row.gender}</TableCell>
+                  <TableCell align="left">{row.age}</TableCell>
+                  <TableCell align="left">{row.price}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
     </div>
   );
 };

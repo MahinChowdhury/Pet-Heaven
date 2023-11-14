@@ -200,7 +200,7 @@ app.post('/addpet', upload.single('file'), async (req, res) => {
   });
 
 app.get('/pets', (req, res) => {
-    const sql = 'SELECT * FROM pets';
+    const sql = "SELECT * FROM pets WHERE available = 'yes'";
   
     db.query(sql, (err, results) => {
       if (err) {
@@ -214,7 +214,7 @@ app.get('/pets', (req, res) => {
 
 
   app.get('/cats', (req, res) => {
-    const sql = 'SELECT * FROM pets WHERE `TYPE` = "Cat"';
+    const sql = "SELECT * FROM pets WHERE type = 'Cat' and available = 'yes'";
   
     db.query(sql, (err, results) => {
       if (err) {
@@ -364,8 +364,25 @@ app.get('/pets', (req, res) => {
     });
   })
 
+  app.get("/adoptionsRequests",(req,res) => {
+    const query = "SELECT * from adoptions WHERE status = 'Pending' or status = 'Approved'";
+
+    db.query(query, (err, results) => { // Change `res` to `results`
+      if (err) {
+        console.error("Database query error: " + err);
+        res.status(500).json({ error: "Error fetching adoption data" });
+      } else {
+        if (results.length === 0) {
+          res.status(404).json({ error: "Adoptions not found" });
+        } else {
+          res.json(results);
+        }
+      }
+    });
+  })
+
   app.get("/allUsers",(req,res) => {
-    const query = "SELECT * from users";
+    const query = "SELECT * from users where role = 'user'";
 
     db.query(query, (err, results) => { // Change `res` to `results`
       if (err) {
@@ -379,7 +396,6 @@ app.get('/pets', (req, res) => {
         }
       }
     });
-
   })
 
   app.post("/addOrder", (req, res) => {
@@ -387,18 +403,29 @@ app.get('/pets', (req, res) => {
     const currentDate = new Date();
     const options = { year: "numeric", month: "2-digit", day: "2-digit" };
     const formattedDate = currentDate.toLocaleDateString("en-GB", options);
-    
+  
     const sql =
-      "INSERT INTO adoptions (`adopter`, `petname`, `contact`, `address`, `email`, `date`, `status`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO adoptions (`adopter`, `petname`, `contact`, `address`, `email`, `date`, `status`) VALUES (?, ?, ?, ?, ?, ?, ?)";
     const values = [name, pName, contact, address, email, formattedDate, "Pending"];
   
+    // Insert into adoptions table
     db.query(sql, values, async (err, data) => {
       if (err) {
         return res.status(500).json({ error: "Error adding adoption" });
       }
-      return res.status(200).json({ message: "Adoption added successfully.", data });
+      const updatePetSql = "UPDATE pets SET available = ? WHERE name = ?";
+      const updatePetValues = ["no", pName];
+  
+      db.query(updatePetSql, updatePetValues, (updateErr) => {
+        if (updateErr) {
+          return res.status(500).json({ error: "Error updating pet availability" });
+        }
+  
+        return res.status(200).json({ message: "Adoption added successfully.", data });
+      });
     });
   });
+  
 
   app.get("/userProfile", (req, res) => {
     const userName = req.query.username;
@@ -457,6 +484,23 @@ app.get('/pets', (req, res) => {
       }
     });
   });
+
+  app.put('/updateStatus/:id', (req, res) => {
+  const itemId = req.params.id;
+  const newStatus = req.body.status;
+
+  // Your database update logic here
+  const query = 'UPDATE adoptions SET status = ? WHERE id = ?';
+
+  db.query(query, [newStatus, itemId], (err, results) => {
+    if (err) {
+      console.error('Database query error:', err);
+      res.status(500).json({ error: 'Error updating status' });
+    } else {
+      res.json({ message: 'Status updated successfully', affectedRows: results.affectedRows });
+    }
+  });
+});
   
   
 app.listen(3001, () => {

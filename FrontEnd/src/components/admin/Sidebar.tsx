@@ -9,7 +9,7 @@ const Sidebar = ({ onSidebarItemClick }) => {
 
   const navigate = useNavigate();
   const handleSignOut = () => {
-    Cookies.set("username", "");
+    Cookies.set("adminname", "");
     navigate("/");
   };
 

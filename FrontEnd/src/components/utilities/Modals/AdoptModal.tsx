@@ -75,21 +75,6 @@ const AdoptModal = ({ isOpen, onClose, petName }) => {
                 X
               </button>
             </div>
-
-            <div className="mt-4">
-              <label htmlFor="name" className="block text-gray-600">
-                Your Name:
-              </label>
-              <input
-                value={name}
-                onChange={handleNameChange}
-                type="text"
-                id="name"
-                className="w-full border border-gray-300 p-2 rounded mt-1"
-                required
-              />
-            </div>
-
             <div className="mt-4">
               <label htmlFor="email" className="block text-gray-600">
                 Email:

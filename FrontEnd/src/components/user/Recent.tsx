@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
 const Recent = () => {
-  const [data, setData] = useState([]);
+  const [row, setRow] = useState([]);
 
   const username = Cookies.get("username");
 
@@ -23,7 +23,7 @@ const Recent = () => {
       .get(`http://localhost:3001/recent?username=${username}`) // Adjust the URL to match your server endpoint
       .then((response) => {
         console.log(response.data);
-        setData(response.data); // Update the data state with the fetched data
+        setRow(response.data); // Update the data state with the fetched data
       })
       .catch((error) => {
         console.error("Error fetching pet data:", error);
@@ -61,14 +61,13 @@ const Recent = () => {
       .then((response) => {
         console.log("Adoption canceled:", response.data);
         // Optionally, update the state or fetch data again after cancellation
-        axios
-          .get(`http://localhost:3001/recent?username=${username}`)
-          .then((fetchResponse) => {
-            console.log("Updated data:", fetchResponse.data);
-            setData(fetchResponse.data); // Update the data state with the fetched data
+        fetch("`http://localhost:3001/recent?username=${username}`")
+          .then((response) => response.json())
+          .then((data) => {
+            setRow(data);
           })
-          .catch((fetchError) => {
-            console.error("Error fetching updated data:", fetchError);
+          .catch((error) => {
+            console.error("Error fetching adoption data:", error);
           });
       })
       .catch((error) => {
@@ -95,7 +94,7 @@ const Recent = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((row, index) => (
+              {row.map((row, index) => (
                 <TableRow key={index}>
                   <TableCell>{row.petname}</TableCell>
                   <TableCell>{row.contact}</TableCell>

@@ -7,6 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./Table.css";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 interface Row {
   id: string;
@@ -37,12 +38,12 @@ const makeStyle = (status: string) => {
   }
 };
 
-const BasicTable: React.FC = () => {
+const RequestTable: React.FC = () => {
   const [rows, setRows] = useState<Row[]>([]);
 
   useEffect(() => {
     // Fetch adoptions data from the server when the component mounts
-    fetch("http://localhost:3001/allAdoptions")
+    fetch("http://localhost:3001/adoptionsRequests")
       .then((response) => response.json())
       .then((data) => {
         setRows(data);
@@ -50,7 +51,53 @@ const BasicTable: React.FC = () => {
       .catch((error) => {
         console.error("Error fetching adoption data:", error);
       });
-  }, []); // Empty dependency array ensures the effect runs only once when the component mounts
+  }, []);
+  // Empty dependency array ensures the effect runs only once when the component mounts
+
+  const handleApprove = (id) => {
+    // Your axios request to update the status
+    axios
+      .put(`http://localhost:3001/updateStatus/${id}`, {
+        status: "Approved", // Set the status to 'Approved' or whatever you need
+      })
+      .then((response) => {
+        console.log(response.data);
+        // Update the data after the status is successfully updated
+        fetch("http://localhost:3001/adoptionsRequests")
+          .then((response) => response.json())
+          .then((data) => {
+            setRows(data);
+          })
+          .catch((error) => {
+            console.error("Error fetching adoption data:", error);
+          });
+      })
+      .catch((error) => {
+        console.error("Error updating status:", error);
+      });
+  };
+  const handleDeliver = (id) => {
+    // Your axios request to update the status
+    axios
+      .put(`http://localhost:3001/updateStatus/${id}`, {
+        status: "Delivered", // Set the status to 'Approved' or whatever you need
+      })
+      .then((response) => {
+        console.log(response.data);
+        // Update the data after the status is successfully updated
+        fetch("http://localhost:3001/adoptionsRequests")
+          .then((response) => response.json())
+          .then((data) => {
+            setRows(data);
+          })
+          .catch((error) => {
+            console.error("Error fetching adoption data:", error);
+          });
+      })
+      .catch((error) => {
+        console.error("Error updating status:", error);
+      });
+  };
 
   return (
     <div className="Table p-10 rounded-3xl">
@@ -75,6 +122,7 @@ const BasicTable: React.FC = () => {
                 <TableCell align="left">Address</TableCell>
                 <TableCell align="left">Date</TableCell>
                 <TableCell align="left">Status</TableCell>
+                <TableCell align="left">Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody style={{ color: "white" }}>
@@ -97,6 +145,23 @@ const BasicTable: React.FC = () => {
                       {row.status}
                     </span>
                   </TableCell>
+                  <TableCell align="left">
+                    {row.status === "Approved" ? (
+                      <div
+                        className="bg-transparent cursor-pointer text-center hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded"
+                        onClick={() => handleDeliver(row.id)}
+                      >
+                        Deliver
+                      </div>
+                    ) : (
+                      <div
+                        className="bg-transparent cursor-pointer text-center hover:bg-green-500 text-green-700 font-semibold hover:text-white py-2 px-2 border border-green-500 hover:border-transparent rounded"
+                        onClick={() => handleApprove(row.id)}
+                      >
+                        Approve
+                      </div>
+                    )}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -107,4 +172,4 @@ const BasicTable: React.FC = () => {
   );
 };
 
-export default BasicTable;
+export default RequestTable;

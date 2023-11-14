@@ -58,37 +58,43 @@ const UserTable: React.FC = () => {
         </div>
       </div>
 
-      <TableContainer
-        className="px-16 py-4"
-        component={Paper}
-        style={{ boxShadow: "0px 13px 20px 0px #80808029" }}
-      >
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Id</TableCell>
-              <TableCell align="left">Name</TableCell>
-              <TableCell align="left">Email</TableCell>
-              <TableCell align="left">Contact</TableCell>
-              <TableCell align="left">Address</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody style={{ color: "white" }}>
-            {rows.map((row) => (
-              <TableRow
-                key={row.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell align="left">{row.id}</TableCell>
-                <TableCell align="left">{row.name}</TableCell>
-                <TableCell align="left">{row.email}</TableCell>
-                <TableCell align="left">{row.contactNumber}</TableCell>
-                <TableCell align="left">{row.address}</TableCell>
+      <div style={{ overflowX: "auto" }}>
+        <TableContainer
+          className="px-16 py-4"
+          component={Paper}
+          style={{
+            boxShadow: "0px 13px 20px 0px #80808029",
+            maxHeight: "600px", // Set the max height as per your requirement
+            overflowY: "auto",
+          }}
+        >
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Id</TableCell>
+                <TableCell align="left">Name</TableCell>
+                <TableCell align="left">Email</TableCell>
+                <TableCell align="left">Contact</TableCell>
+                <TableCell align="left">Address</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody style={{ color: "white" }}>
+              {rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell align="left">{row.id}</TableCell>
+                  <TableCell align="left">{row.name}</TableCell>
+                  <TableCell align="left">{row.email}</TableCell>
+                  <TableCell align="left">{row.contactNumber}</TableCell>
+                  <TableCell align="left">{row.address}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
     </div>
   );
 };

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 13, 2023 at 08:51 PM
+-- Generation Time: Nov 14, 2023 at 01:06 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -44,11 +44,20 @@ CREATE TABLE `adoptions` (
 
 INSERT INTO `adoptions` (`id`, `adopter`, `petname`, `contact`, `address`, `email`, `date`, `status`) VALUES
 (8, 'Mahin', 'LGR Lovebirds', '01839963763', 'Dhaka,Bangladesh', 'mahin00021@gmail.com', '14/11/2023', 'Delivered'),
-(10, 'Mahin', 'Jackson', '01839963763', 'Dhaka,Bangladesh', 'mahin00021@gmail.com', '14/11/2023', 'Pending'),
-(11, 'Mahin', 'Siimba and Nala', '01839963763', 'Mirpur,Dhaka', 'mahin00021@gmail.com', '14/11/2023', 'Pending'),
+(11, 'Mahin', 'Siimba and Nala', '01839963763', 'Mirpur,Dhaka', 'mahin00021@gmail.com', '14/11/2023', 'Approved'),
 (12, 'Mahin', 'Piglet', '01839963763', 'Jessore,Bangladesh', 'mahin00021@gmail.com', '14/11/2023', 'Pending'),
-(13, 'Talha', 'Siimba and Nala', '01871212436', 'Mirpur,Dhaka', 'talha39@gmail.com', '14/11/2023', 'Processing'),
-(14, 'Talha', 'Mocha', '01871212436', 'Jessore,Bangladesh', 'talha39@gmail.com', '14/11/2023', 'Pending');
+(13, 'Talha', 'Siimba and Nala', '01871212436', 'Mirpur,Dhaka', 'talha39@gmail.com', '14/11/2023', 'Approved'),
+(14, 'Talha', 'Mocha', '01871212436', 'Jessore,Bangladesh', 'talha39@gmail.com', '14/11/2023', 'Pending'),
+(15, 'Mahin', 'Jackson', '01839963763', 'Dhaka,Bangladesh', 'mahin00021@gmail.com', '14/11/2023', 'Pending'),
+(16, 'mahin', 'Mocha', '01839963763', 'Mirpur,Dhaka', 'mahin00021@gmail.com', '14/11/2023', 'Pending'),
+(17, 'mahin', 'Mocha', '01839963763', 'Mirpur,Dhaka', 'mahin00021@gmail.com', '14/11/2023', 'Pending'),
+(18, 'mahin', 'Mocha', '01839963763', 'Mirpur,Dhaka', 'mahin00021@gmail.com', '14/11/2023', 'Pending'),
+(19, 'mahin', 'Mocha', '01839963763', 'Mirpur,Dhaka', 'mahin00021@gmail.com', '14/11/2023', 'Pending'),
+(20, 'mahin', 'Mocha', '01839963763', 'Mirpur,Dhaka', 'mahin00021@gmail.com', '14/11/2023', 'Pending'),
+(21, 'mahin', 'Mocha', '01839963763', 'Mirpur,Dhaka', 'mahin00021@gmail.com', '14/11/2023', 'Pending'),
+(22, 'mahin', 'Mocha', '01839963763', 'Mirpur,Dhaka', 'mahin00021@gmail.com', '14/11/2023', 'Pending'),
+(23, 'mahin', 'Piglet', '01839963763', 'Dinajpur,Bangladesh', 'mahin00021@gmail.com', '14/11/2023', 'Pending'),
+(24, 'admin', 'LGR Lovebirds', '01839963763', 'Amar Ekushey Hall, KUET,Fulbarigate,Khulna', 'mahin00021@gmail.com', '14/11/2023', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -65,21 +74,22 @@ CREATE TABLE `pets` (
   `age` varchar(10) NOT NULL,
   `gender` varchar(10) NOT NULL,
   `price` int(11) NOT NULL,
-  `image` varchar(50) DEFAULT NULL
+  `image` varchar(50) DEFAULT NULL,
+  `available` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pets`
 --
 
-INSERT INTO `pets` (`id`, `name`, `type`, `breed`, `description`, `age`, `gender`, `price`, `image`) VALUES
-(25, 'Mocha', 'Dog', 'Chihuahua', 'Mocha is affectionate,calm and exteranodvaosdfasdv', '2', 'Male', 350, '1.PNG'),
-(26, 'Nickel', 'Cat', 'Bengali Cat', 'Nickel is a sweet and extremely curious hdasof haosdf vasndofds fgasodfh', '1', 'Female', 450, '2.PNG'),
-(27, 'Piglet', 'Cat', 'Domestic Short Hair', 'Piglet is a kitten with a great dreams of finding the perfect one! She\'s hasof vhsoadv sdvoasn ytwowa goyahak', '6', 'Female', 500, '3.PNG'),
-(28, 'Shell-lock Holmes', 'Tortoise', 'Russian', 'This adorable Russian tortoise is Shell-lock Holmes. He enjoys sdga dfasv vhhao pasdf', '13', 'Male', 550, '8.PNG'),
-(29, 'Siimba and Nala', 'Rabbit', 'Rex Mix', 'Simba and Nala are a bonded pair of medium-large rabbits. Both born sdaf yowqa qodfjhw woudf.', '3', 'Male', 32, '7.PNG'),
-(30, 'Jackson', 'Guinea Pig', 'Short-Haired', 'It hanbdo adsf aslge qw pufea nbnvbuia fhwsiovc gfbeicva opqfwegf bqwicsadfldhg gkasdgf.', '3', 'Male', 30, '6.PNG'),
-(31, 'LGR Lovebirds', 'Bird', 'Lovebird', 'many lovebirds waiting for their perfect home. Many of them are very friendly and would love to keep you and you family company.', '16', 'Male', 650, '5.PNG');
+INSERT INTO `pets` (`id`, `name`, `type`, `breed`, `description`, `age`, `gender`, `price`, `image`, `available`) VALUES
+(25, 'Mocha', 'Dog', 'Chihuahua', 'Mocha is affectionate,calm and exteranodvaosdfasdv', '2', 'Male', 350, '1.PNG', 'yes'),
+(26, 'Nickel', 'Cat', 'Bengali Cat', 'Nickel is a sweet and extremely curious hdasof haosdf vasndofds fgasodfh', '1', 'Female', 450, '2.PNG', 'yes'),
+(27, 'Piglet', 'Cat', 'Domestic Short Hair', 'Piglet is a kitten with a great dreams of finding the perfect one! She\'s hasof vhsoadv sdvoasn ytwowa goyahak', '6', 'Female', 500, '3.PNG', 'yes'),
+(28, 'Shell-lock Holmes', 'Tortoise', 'Russian', 'This adorable Russian tortoise is Shell-lock Holmes. He enjoys sdga dfasv vhhao pasdf', '13', 'Male', 550, '8.PNG', 'yes'),
+(29, 'Siimba and Nala', 'Rabbit', 'Rex Mix', 'Simba and Nala are a bonded pair of medium-large rabbits. Both born sdaf yowqa qodfjhw woudf.', '3', 'Male', 32, '7.PNG', 'yes'),
+(30, 'Jackson', 'Guinea Pig', 'Short-Haired', 'It hanbdo adsf aslge qw pufea nbnvbuia fhwsiovc gfbeicva opqfwegf bqwicsadfldhg gkasdgf.', '3', 'Male', 30, '6.PNG', 'yes'),
+(31, 'LGR Lovebirds', 'Bird', 'Lovebird', 'many lovebirds waiting for their perfect home. Many of them are very friendly and would love to keep you and you family company.', '16', 'Male', 650, '5.PNG', 'yes');
 
 -- --------------------------------------------------------
 
@@ -137,7 +147,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `adoptions`
 --
 ALTER TABLE `adoptions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `pets`

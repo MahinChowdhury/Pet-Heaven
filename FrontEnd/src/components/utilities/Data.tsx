@@ -6,6 +6,7 @@ import { FaList } from "react-icons/fa";
 import { TbPigMoney } from "react-icons/tb";
 import { FiDollarSign } from "react-icons/fi";
 import { GiReceiveMoney } from "react-icons/gi";
+import { FaHistory } from "react-icons/fa";
 
 import img1 from "/img1.png";
 import img2 from "/img2.png";
@@ -28,6 +29,10 @@ export const SidebarData = [
   {
     icon: GrUser,
     heading: "Users",
+  },
+  {
+    icon: FaHistory,
+    heading: "Requests",
   },
 ];
 
