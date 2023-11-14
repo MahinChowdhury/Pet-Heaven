@@ -20,7 +20,7 @@ interface Row {
 }
 
 const makeStyle = (status: string) => {
-  if (status === "Approved" || status === "Delivered") {
+  if (status === "Approved") {
     return {
       background: "rgb(145 254 159 / 47%)",
       color: "green",

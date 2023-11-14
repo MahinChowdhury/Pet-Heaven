@@ -30,7 +30,7 @@ const PetFilter = ({ onSearch }) => {
             <option value="" className="font-bold">
               Breed
             </option>
-            <option value="user">Breed</option>
+            <option value="Persian">Persian</option>
             <option value="Bengali Cat">Bengali Cat</option>
             <option value="admin">Breed 2</option>
             <option value="admin">Breed 3</option>
